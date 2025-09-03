@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElectroMart - Your Ultimate Electronics Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+
+        /* Custom animations for uniqueness */
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(20px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+
+        /* Smooth scrolling */
+
+        html { scroll-behavior: smooth; }
+
+        /* Custom styles for product cards */
+
+        .product-card {
+
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        }
+
+        .product-card:hover {
+
+            transform: translateY(-10px);
+
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+        }
+
+        /* Cart overlay */
+
+        .cart-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            right: -100%;
+
+            width: 350px;
+
+            height: 100%;
+
+            background: white;
+
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+
+            transition: right 0.3s ease;
+
+            z-index: 1000;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+        }
+
+        .cart-open { right: 0; }
+
+    </style>
+
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+
+            <div class="text-2xl font-bold text-blue-600">ElectroMart</div>
+
+            <nav class="hidden md:flex space-x-6">
+
+                <a href="#home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
+
+                <a href="#products" class="text-gray-700 hover:text-blue-600 transition">Products</a>
+
+                <a href="#about" class="text-gray-700 hover:text-blue-600 transition">About</a>
+
+                <a href="#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
+
+            </nav>
+
+            <button id="cart-btn" class="relative bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+
+                Cart (<span id="cart-count">0</span>)
+
+            </button>
+
+            <button class="md:hidden text-gray-700" id="menu-toggle">≡</button>
+
+        </div>
+
+        <!-- Mobile Menu -->
+
+        <nav class="md:hidden hidden bg-white border-t" id="mobile-menu">
+
+            <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+
+            <a href="#products" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Products</a>
+
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</a>
+
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+
+        </nav>
+
+    </header>
+
+    <!-- Hero Section -->
+
+    <section id="home" class="relative bg-blue-600 text-white py-20">
+
+        <div class="container mx-auto px-4 text-center">
+
+            <h1 class="text-5xl font-bold mb-4 fade-in">Discover Cutting-Edge Electronics</h1>
+
+            <p class="text-xl mb-8 fade-in">From smartphones to laptops, find the latest gadgets at unbeatable prices.</p>
+
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4bae2dd-fea4-4f01-b9bd-9c67bc4c49f7.png" alt="Modern electronics store interior with illuminated display shelves showcasing smartphones, laptops, and headphones in a sleek, futuristic layout with soft blue ambient lighting and minimalistic decor" class="w-full rounded-lg shadow-lg mb-8" />
+
+            <a href="#products" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Shop Now</a>
+
+        </div>
+
+    </section>
+
+    <!-- Products Section -->
+
+    <section id="products" class="py-20 bg-white">
+
+        <div class="container mx-auto px-4">
+
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Featured Electronics</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Product 1 -->
+
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f75f1fd0-e9d8-465f-a500-14bb3ae2656d.png" alt="High-resolution image of a sleek black smartphone with a large touchscreen displaying a bright blue home screen, accompanied by charging accessories and a protective case on a clean white background" class="w-full h-48 object-cover" />
+
+                    <div class="p-6">
+
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Latest Smartphone</h3>
+
+                        <p class="text-gray-600 mb-4">Flagship device with advanced camera and AI features.</p>
+
+                        <p class="text-2xl font-bold text-blue-600 mb-4">$699</p>
+
+                        <button class="add-to-cart bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" data-product="Latest Smartphone" data-price="699">Add to Cart</button>
+
+                    </div>
+
+                </div>
+
+                <!-- Product 2 -->
+
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/210be663-2a50-4120-aab5-2f0d9241d123.png" alt="Silver laptop on a desk with open lid showing a colorful productivity interface, surrounded by a mouse, keyboard, and notebook in a cozy home office setting with warm sunlight filtering through curtains" class="w-full h-48 object-cover" />
+
+                    <div class="p-6">
+
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Ultrabook Laptop</h3>
+
+                        <p class="text-gray-600 mb-4">Lightweight and powerful for work and play.</p>
+
+                        <p class="text-2xl font-bold text-blue-600 mb-4">$1299</p>
+
+                        <button class="add-to-cart bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" data-product="Ultrabook Laptop" data-price="1299">Add to Cart</button>
+
+                    </div>
+
+                </div>
+
+                <!-- Product 3 -->
+
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0c39bbd1-6871-4ef0-8603-8b965bde3630.png" alt="Over-ear wireless headphones in black and white, with padded cushions and sleek design, placed on a minimalist stylist stand with connecting wires coiled neatly, representing premium audio quality" class="w-full h-48 object-cover" />
+
+                    <div class="p-6">
+
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Noise-Canceling Headphones</h3>
+
+                        <p class="text-gray-600 mb-4">Immerse yourself in pure sound isolation.</p>
+
+                        <p class="text-2xl font-bold text-blue-600 mb-4">$249</p>
+
+                        <button class="add-to-cart bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" data-product="Noise-Canceling Headphones" data-price="249">Add to Cart</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- About Section -->
+
+    <section id="about" class="py-20 bg-gray-50">
+
+        <div class="container mx-auto px-4">
+
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Why Choose ElectroMart?</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div class="text-center">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/12b3fd56-b4a4-4a27-8b5f-c5890d54ad4f.png" alt="Iconic shield symbol representing security and trust, with lock elements and checkmarks, in a professional blue and green color scheme denoting reliability and protection" class="w-20 h-20 mx-auto mb-4" />
+
+                    <h3 class="text-xl font-semibold mb-2">Secure Shopping</h3>
+
+                    <p class="text-gray-600">Your data is protected with top-tier encryption and SSL.</p>
+
+                </div>
+
+                <div class="text-center">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/19ca39fb-7cb8-4a87-9378-b7ea4b28305b.png" alt="Delivery truck icon speeding towards a house, with smoke trails and clock signifying fast shipping, in vibrant orange and yellow hues for express service" class="w-20 h-20 mx-auto mb-4" />
+
+                    <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+
+                    <p class="text-gray-600">Get your orders delivered to your doorstep within 24 hours.</p>
+
+                </div>
+
+                <div class="text-center">
+
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/92eaa312-e935-41bd-834b-1ac943bc6afb.png" alt="Rotating arrows in a circular pattern forming a refresh symbol, with green accents indicating return process, illustrating easy exchanges and warranties" class="w-20 h-20 mx-auto mb-4" />
+
+                    <h3 class="text-xl font-semibold mb-2">Easy Returns</h3>
+
+                    <p class="text-gray-600">Not satisfied? Return within 30 days for a full refund.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Contact Section -->
+
+    <section id="contact" class="py-20 bg-white">
+
+        <div class="container mx-auto px-4">
+
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Get in Touch</h2>
+
+            <div class="max-w-md mx-auto">
+
+                <form class="space-y-4">
+
+                    <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+
+                    <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" />
+
+                    <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+
+                    <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Send Message</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="bg-blue-600 text-white py-8">
+
+        <div class="container mx-auto px-4 text-center">
+
+            <p>© 2023 ElectroMart. All rights reserved.</p>
+
+            <p class="mt-2">Built with passion for tech enthusiasts.</p>
+
+        </div>
+
+    </footer>
+
+    <!-- Cart Overlay -->
+
+    <div class="cart-overlay" id="cart-overlay">
+
+        <h3 class="text-2xl font-bold mb-4">Your Cart</h3>
+
+        <div id="cart-items"></div>
+
+        <div class="mt-4">
+
+            <p class="text-lg font-semibold">Total: $<span id="cart-total">0</span></p>
+
+            <button class="w-full bg-green-500 text-white py-2 rounded mt-2">Checkout</button>
+
+        </div>
+
+        <button id="close-cart" class="absolute top-4 right-4 text-2xl">×</button>
+
+    </div>
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Mobile menu toggle
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+
+        });
+
+        // Cart functionality
+
+        let cart = [];
+
+        const cartCount = document.getElementById('cart-count');
+
+        const cartItems = document.getElementById('cart-items');
+
+        const cartTotal = document.getElementById('cart-total');
+
+        document.getElementById('cart-btn').addEventListener('click', function() {
+
+            document.getElementById('cart-overlay').classList.add('cart-open');
+
+        });
+
+        document.getElementById('close-cart').addEventListener('click', function() {
+
+            document.getElementById('cart-overlay').classList.remove('cart-open');
+
+        });
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+
+            button.addEventListener('click', function() {
+
+                const product = this.getAttribute('data-product');
+
+                const price = parseFloat(this.getAttribute('data-price'));
+
+                
+
+                const existingItem = cart.find(item => item.product === product);
+
+                if (existingItem) {
+
+                    existingItem.quantity += 1;
+
+                } else {
+
+                    cart.push({ product, price, quantity: 1 });
+
+                }
+
+                
+
+                updateCart();
+
+            });
+
+        });
+
+        function updateCart() {
+
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            cartItems.innerHTML = '';
+
+            let total = 0;
+
+            
+
+            cart.forEach(item => {
+
+                total += item.price * item.quantity;
+
+                const itemDiv = document.createElement('div');
+
+                itemDiv.className = 'flex justify-between items-center mb-2';
+
+                itemDiv.innerHTML = `<span>${item.product} (x${item.quantity})</span><span>$${(item.price * item.quantity).toFixed(2)}</span>`;
+
+                cartItems.appendChild(itemDiv);
+
+            });
+
+            
+
+            cartTotal.textContent = total.toFixed(2);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+</content>
+
+</create_file>
+
